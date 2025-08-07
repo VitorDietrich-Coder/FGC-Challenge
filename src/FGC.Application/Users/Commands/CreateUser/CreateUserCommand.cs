@@ -1,18 +1,17 @@
 ﻿using FGC.Application.Common;
 using FGC.Application.Users.Models.Response;
-using FGC.Domain.Users;
-using FGC.Domain.Users.Enums;
-using FGC.Domain.Users.ValueObjects;
-using MediatR;
+using FGC.Domain.Entities.Users;
+using FGC.Domain.Entities.Users.Enums;
+using FGC.Domain.Entities.Users.ValueObjects;
 
 namespace FGC.Application.Users.Commands.CreateUser
 {
     public class CreateUserCommand : IRequest<UserResponse>
     {
         public string Name { get; set; }
+        public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Username { get; set; }
     }
 
     public class CreateUserCommandHandler
@@ -33,7 +32,7 @@ namespace FGC.Application.Users.Commands.CreateUser
             {
                 Email = new Email(request.Email),
                 Name = request.Name,
-                Password = new Password(request.Password, false),
+                Password = new Password(request.Password),
                 Username = request.Username,
                 TypeUser = UserType.User
             };

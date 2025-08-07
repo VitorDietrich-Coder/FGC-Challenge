@@ -1,5 +1,4 @@
-﻿using FGC.Domain.SaleAggregate;
-using System.Diagnostics.CodeAnalysis;
+﻿using FGC.Domain.Entities.Sales;
 
 namespace FGC.Application.Sales.Models.Response
 {

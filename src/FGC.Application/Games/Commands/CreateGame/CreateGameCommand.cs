@@ -1,8 +1,8 @@
 ﻿using FGC.Application.Common;
 using FGC.Application.Users.Models.Response;
 using FGC.Application.Games.Models.Response;
-using FGC.Domain.GameAggregate;
 using FGC.Domain.Common.ValueObjects;
+using FGC.Domain.Entities.Games;
 
 namespace FGC.Application.Games.Commands.CreateGame
 {
@@ -28,7 +28,6 @@ namespace FGC.Application.Games.Commands.CreateGame
         public async Task<GameResponse> Handle(CreateGameCommand request,
             CancellationToken cancellationToken)
         {
-
             var game = new Game
             {
                 Name = request.Name,

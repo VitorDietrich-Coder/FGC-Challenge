@@ -1,9 +1,8 @@
 ﻿using FGC.Application.Common;
 using FGC.Application.Users.Models.Response;
-using FGC.Domain.Users;
-using FGC.Domain.Users.Enums;
-using FGC.Domain.Users.ValueObjects;
-using MediatR;
+using FGC.Domain.Entities.Users;
+using FGC.Domain.Entities.Users.Enums;
+using FGC.Domain.Entities.Users.ValueObjects;
 
 namespace FGC.Application.Users.Commands.CreateAdmin
 {
@@ -33,7 +32,7 @@ namespace FGC.Application.Users.Commands.CreateAdmin
             {
                 Name = request.Name,
                 Username = request.Username,
-                Email = new Email(request.Email),
+                 Email = new Email(request.Email),
                 Password = new Password(request.Password),
                 TypeUser = UserType.Admin
             };

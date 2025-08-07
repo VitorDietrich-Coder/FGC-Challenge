@@ -1,6 +1,5 @@
 ﻿using FGC.Application.Common;
 using FGC.Application.Users.Models.Response;
-using FGC.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace FGC.Application.Users.Queries.GetUser;

@@ -1,6 +1,7 @@
 using FGC.Application.Common;
 using FluentValidation;
- 
+using Microsoft.EntityFrameworkCore;
+
 
 namespace FGC.Application.Games.Commands.CreateGame
 {
@@ -18,7 +19,14 @@ namespace FGC.Application.Games.Commands.CreateGame
                 .Matches(@"^[A-Za-z0-9\s]+$")
                 .WithMessage("Game name can only contain letters, numbers, and spaces.")
                 .MaximumLength(100)
-                .WithMessage("Game name must be at most 100 characters long.");
+                .WithMessage("Game name must be at most 100 characters long.")
+                .MustAsync(async (name, cancellation) =>
+                {
+                    var exists = await _context.Games.AnyAsync(g => g.Name == name);
+                    return !exists;
+                })
+                .WithMessage("A game with this name already exists.");
+
 
             RuleFor(x => x.Category)
                 .NotEmpty()

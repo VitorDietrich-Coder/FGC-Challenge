@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿
 
 namespace FGC.Application.Auth.Models.Response
 {

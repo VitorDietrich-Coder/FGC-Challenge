@@ -1,16 +1,22 @@
 ﻿using FluentValidation;
-using System.Diagnostics.CodeAnalysis;
+
 
 namespace FGC.Application.Users.Commands.CreateUser
 {
     
-    public class CreateUserRequestValidator : AbstractValidator<CreateUserCommand>
+    public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
     {
-        public CreateUserRequestValidator()
+        public CreateUserCommandValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .WithMessage("Name is required.")
+                .MaximumLength(100)
+                .WithMessage("Name must be less than or equal to 100 characters.");
+
+            RuleFor(x => x.Username)
+                .NotEmpty()
+                .WithMessage("Username is required.")
                 .MaximumLength(100)
                 .WithMessage("Name must be less than or equal to 100 characters.");
 

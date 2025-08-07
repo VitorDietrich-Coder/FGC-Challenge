@@ -1,5 +1,5 @@
 ﻿using FGC.Application.Common;
-using FGC.Domain.GameAggregate;
+using FGC.Domain.Entities.Games;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -60,7 +60,7 @@ public class UpdateSaleCommandHandler
                 continue;
             }
 
-            game.AssignPromotion(sale.Id);
+            game.UpdateSale(sale.Id);
             games.Add(game);
         }
 

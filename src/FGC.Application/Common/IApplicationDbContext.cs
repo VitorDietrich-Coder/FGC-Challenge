@@ -1,7 +1,6 @@
-﻿using FGC.Domain.GameAggregate;
-using FGC.Domain.SaleAggregate;
-using FGC.Domain.Users;
-using FGC.Domain.Users.Entities;
+﻿using FGC.Domain.Entities.Games;
+using FGC.Domain.Entities.Sales;
+using FGC.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 

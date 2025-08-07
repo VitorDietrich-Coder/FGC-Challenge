@@ -1,8 +1,8 @@
 ﻿using FGC.Application.Common;
 using FGC.Application.Sales.Models.Response;
 using FGC.Domain.Common.ValueObjects;
-using FGC.Domain.GameAggregate;
-using FGC.Domain.SaleAggregate;
+using FGC.Domain.Entities.Games;
+using FGC.Domain.Entities.Sales;
 using Microsoft.EntityFrameworkCore;
 
 namespace FGC.Application.Sales.Commands.CreateSale

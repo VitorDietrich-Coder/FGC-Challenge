@@ -1,6 +1,5 @@
 ﻿using FGC.Application.Common;
 using FGC.Application.Auth.Models.Response;
-using FGC.Domain.Users;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,13 +7,14 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Authentication;
+using FGC.Domain.Entities.Users;
 
 namespace FGC.Application.Auth.Commands
 {
     
     public class LoginCommand : IRequest<LoginResponse>
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 
@@ -33,11 +33,11 @@ namespace FGC.Application.Auth.Commands
 
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var normalizedUsername = request.Username.Trim().ToLowerInvariant();
+            var normalizedEmail = request.Email.Trim().ToLowerInvariant();
 
             var user = await _context.Users
                 .AsNoTracking()
-                .FirstOrDefaultAsync(u => u.Email.Address.ToLower() == normalizedUsername, cancellationToken);
+                .FirstOrDefaultAsync(u => u.Email.Address.ToLower() == normalizedEmail, cancellationToken);
 
             if (user is null)
             {
@@ -74,6 +74,7 @@ namespace FGC.Application.Auth.Commands
             var claims = new List<Claim>
             {
                 new ("username", user.Email.Address),
+                new ("id", user.Id.ToString()),
                 new (ClaimTypes.Role, user.TypeUser.ToString())
             };
 

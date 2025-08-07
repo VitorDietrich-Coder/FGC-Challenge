@@ -1,5 +1,4 @@
-using FGC.Domain.GameAggregate;
-using System.Diagnostics.CodeAnalysis;
+using FGC.Domain.Entities.Games;
 
 namespace FGC.Application.Games.Models.Response
 {

@@ -1,4 +1,5 @@
-﻿using FGC.Domain.Users.Enums;
+﻿using FGC.Domain.Entities.Users;
+using FGC.Domain.Entities.Users.Enums;
 using System.Diagnostics.CodeAnalysis;
 
 namespace FGC.Application.Users.Models.Response
@@ -14,7 +15,7 @@ namespace FGC.Application.Users.Models.Response
         public UserType Type { get; set; }
         public bool Active { get; set; }
 
-        public static explicit  operator UserResponse(Domain.Users.User user)
+        public static explicit  operator UserResponse(User user)
         {
             return new UserResponse
             {

@@ -7,7 +7,7 @@ namespace FGC.Application.Auth.Commands
     {
         public LoginValidator()
         {
-            RuleFor(x => x.Username)
+            RuleFor(x => x.Email)
               .NotEmpty()
               .WithMessage("Username is required.")
               .EmailAddress()
