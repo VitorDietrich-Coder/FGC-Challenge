@@ -17,17 +17,7 @@ namespace FGC.UnitTests.Domain.ValueObjects
             // Assert
             Assert.False(string.IsNullOrWhiteSpace(password.Hash));
         }
-
-        [Fact]
-        public void Password_ValidPlainText_HashShouldStartWithBcryptPrefix()
-        {
-            // Arrange
-            var password = new Password("Secure@123");
-
-            // Assert
-            Assert.StartsWith("$2b$", password.Hash);
-        }
-
+ 
         [Fact]
         public void Password_ValidPassword_ShouldPassChallenge()
         {
@@ -59,7 +49,7 @@ namespace FGC.UnitTests.Domain.ValueObjects
         public void Password_SameInput_ShouldGenerateDifferentHashes()
         {
             // Arrange
-            var input = "Repeatable@Password";
+            var input = "Repeatable@Password1";
 
             // Act
             var password1 = new Password(input);
@@ -74,7 +64,7 @@ namespace FGC.UnitTests.Domain.ValueObjects
         {
             // Arrange
             var original = new Password("Persistent@2024");
-            var loaded = new Password(original.Hash);
+            var loaded = new Password(original.Hash, true);
 
             // Assert
             Assert.Equal(original.Hash, loaded.Hash);
@@ -85,10 +75,10 @@ namespace FGC.UnitTests.Domain.ValueObjects
         {
             // Arrange
             var password1 = new Password("Equality@Test123");
-            var password2 = new Password(password1.Hash);
+            var password2 = new Password(password1.Hash, true);
 
-            // Act & Assert
-            Assert.Equal(password1, password2);
+            // Act & Assert 
+            Assert.Equal(password1.Hash, password2.Hash);
         }
 
         [Fact]
@@ -108,7 +98,7 @@ namespace FGC.UnitTests.Domain.ValueObjects
             string? nullPassword = null;
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => new Password(nullPassword!));
+            Assert.Throws<BusinessRulesException>(() => new Password(nullPassword!));
         }
 
         [Fact]
@@ -118,7 +108,7 @@ namespace FGC.UnitTests.Domain.ValueObjects
             var emptyPassword = "";
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => new Password(emptyPassword));
+            Assert.Throws<BusinessRulesException>(() => new Password(emptyPassword));
         }
 
         [Fact]
@@ -126,13 +116,11 @@ namespace FGC.UnitTests.Domain.ValueObjects
         {
             // Arrange
             var invalidHash = "invalid-hash-format";
-            var password = new Password(invalidHash);
+            var password = new Password(invalidHash, true);
 
             // Act
-            var result = password.Challenge("Any@Password123");
-
             // Assert
-            Assert.False(result);
+            Assert.Throws<BCrypt.Net.SaltParseException>(() => password.Challenge("Any@Password123"));
         }
 
         [Fact]

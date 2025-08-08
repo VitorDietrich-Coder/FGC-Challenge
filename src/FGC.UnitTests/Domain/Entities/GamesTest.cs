@@ -1,7 +1,8 @@
 ﻿using FGC.Domain.Core.Exceptions;
 using FGC.Domain.Entities.Games;
-using FGC.Domain.Entities.Sales;
+using FGC.Domain.Entities.Deals;
 using FGC.Domain.Entities.Users;
+using FGC.Infra.Data.MapEntities;
 
 namespace FGC.Unit.Tests.Domain.Entities
 {
@@ -16,8 +17,8 @@ namespace FGC.Unit.Tests.Domain.Entities
             Assert.Null(game.Name);
             Assert.Null(game.Category);
             Assert.Equal(null, game.Price);
-            Assert.Null(game.SaleID);
-            Assert.Null(game.Sale);
+            Assert.Null(game.DealId);
+            Assert.Null(game.Deal);
             Assert.Null(game.Libraries);
         }
 
@@ -30,7 +31,7 @@ namespace FGC.Unit.Tests.Domain.Entities
             Assert.Equal("Action", game.Category);
             Assert.Equal(49.99M, game.Price.Value);
             Assert.Equal("BRL", game.Price.Currency);
-            Assert.Null(game.SaleID);
+            Assert.Null(game.DealId);
         }
 
         [Fact]
@@ -42,7 +43,7 @@ namespace FGC.Unit.Tests.Domain.Entities
             Assert.Equal("Game With ID", game.Name);
             Assert.Equal("RPG", game.Category);
             Assert.Equal(59.99M, game.Price.Value);            
-            Assert.Equal(5, game.SaleID);
+            Assert.Equal(5, game.DealId);
         }
 
         [Theory]
@@ -92,36 +93,36 @@ namespace FGC.Unit.Tests.Domain.Entities
         public void AssignPromotion_ShouldSetPromotionId()
         {
             var game = new Game("Game", "Puzzle", 19.99M, null);
-            game.UpdateSale(5);
+            game.UpdateDeal(5);
 
-            Assert.Equal(5, game.SaleID);
+            Assert.Equal(5, game.DealId);
         }
 
         [Fact]
         public void Promotion_Property_ShouldWorkCorrectly()
         {
-            var promotion = new Sale(20, DateTime.UtcNow, DateTime.UtcNow.AddDays(7), "description");
-            var game = new Game { Sale = promotion };
+            var deal = new Deal(20, DateTime.UtcNow, DateTime.UtcNow.AddDays(7), "description");
+            var game = new Game { Deal = deal };
 
-            Assert.NotNull(game.Sale);
-            Assert.Equal(20, game.Sale.Discount.Value);
+            Assert.NotNull(game.Deal);
+            Assert.Equal(20, game.Deal.Discount.Value);
         }
 
         [Fact]
         public void PromotionId_ShouldWork_WithoutPromotionObject()
         {
-            var game = new Game { SaleID = 5 };
+            var game = new Game { DealId = 5 };
 
-            Assert.Equal(5, game.SaleID);
-            Assert.Null(game.Sale);
+            Assert.Equal(5, game.DealId);
+            Assert.Null(game.Deal);
         }
 
         [Fact]
         public void Should_Handle_Null_Promotion()
         {
-            var game = new Game { Sale = null };
+            var game = new Game { Deal = null };
 
-            Assert.Null(game.Sale);
+            Assert.Null(game.Deal);
         }
 
         [Fact]
@@ -199,13 +200,13 @@ namespace FGC.Unit.Tests.Domain.Entities
         public void Promotion_ShouldUpdateCorrectly_WhenReassigned()
         {
             var game = new Game();
-            var promotion1 = new Sale(10, DateTime.UtcNow, DateTime.UtcNow.AddDays(1), "description");
-            var promotion2 = new Sale(20, DateTime.UtcNow, DateTime.UtcNow.AddDays(2), "description");
+            var promotion1 = new Deal(10, DateTime.UtcNow, DateTime.UtcNow.AddDays(1), "description");
+            var promotion2 = new Deal(20, DateTime.UtcNow, DateTime.UtcNow.AddDays(2), "description");
 
-            game.Sale = promotion1;
-            game.Sale = promotion2;
+            game.Deal = promotion1;
+            game.Deal = promotion2;
 
-            Assert.Equal(20, game.Sale.Discount.Value);
+            Assert.Equal(20, game.Deal.Discount.Value);
         }
 
         [Fact]
@@ -224,13 +225,13 @@ namespace FGC.Unit.Tests.Domain.Entities
         public void Promotion_Setter_ShouldHandleReassignment()
         {
             var game = new Game();
-            var sale1 = new Sale(15, DateTime.UtcNow, DateTime.UtcNow.AddDays(1), "description");
-            var sale2 = new Sale(35, DateTime.UtcNow, DateTime.UtcNow.AddDays(2), "description");
+            var deal1 = new Deal(15, DateTime.UtcNow, DateTime.UtcNow.AddDays(1), "description");
+            var deal2 = new Deal(35, DateTime.UtcNow, DateTime.UtcNow.AddDays(2), "description");
 
-            game.Sale = sale1;
-            game.Sale = sale2;
+            game.Deal = deal1;
+            game.Deal = deal2;
 
-            Assert.Equal(35, game.Sale.Discount.Value);
+            Assert.Equal(35, game.Deal.Discount.Value);
         }
 
         [Fact]
@@ -240,10 +241,10 @@ namespace FGC.Unit.Tests.Domain.Entities
             var name = "Test Game";
             var category = "Action";
             var price = 99.99M;
-            var saleId = (int?)null;
+            var dealId = (int?)null;
 
             // Act
-            var game = new Game(name, category, price, saleId);
+            var game = new Game(name, category, price, dealId);
 
             // Assert
             Assert.Equal(name, game.Name);
@@ -290,11 +291,11 @@ namespace FGC.Unit.Tests.Domain.Entities
             var name = "Test Game";
             var genre = "Action";
             var price = 99.99M;
-            var saleId = (int?)null;
+            var dealId = (int?)null;
             var currency = "USD";
 
             // Act
-            var game = new Game(name, genre, price, saleId, currency);
+            var game = new Game(name, genre, price, dealId, currency);
 
             // Assert
             Assert.Equal(name, game.Name);
