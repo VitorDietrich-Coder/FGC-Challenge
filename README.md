@@ -50,17 +50,18 @@ cd FGC-Challenge
 
 dotnet restore
 ```
-
-# 👤 Autenticação no SQL Server
+# 🌐 Configuração de Host
+- 👤 Autenticação no SQL Server
+  
 SQLSERVER_USER=seu_usuario
 SQLSERVER_PASSWORD=sua_senha_segura
 
-# 🗃️ Banco de Dados
+- 🗃️ Banco de Dados
 SQLSERVER_DB=FGC_Games
-
-# 🌐 Configuração de Host
 SQLSERVER_HOST=localhost
 SQLSERVER_PORT=1433
+
+Alterar no Arquivo AppsettingsDevelop.json
 
 "ConnectionStrings": {
   "DefaultConnection": "Server=localhost,1433;Database=FGC_Games;User Id=seu_usuario;Password=sua_senha_segura;TrustServerCertificate=True;"
