@@ -24,7 +24,7 @@ O **FGC** simula uma **loja virtual de jogos digitais** com recursos completos d
 
 - 🔐 Login e autenticação com **JWT**
 - 🎮 Cadastro e listagem de jogos
-- 💸 Aplicação de **promoções dinâmicas**
+- 💸 Aplicação de **promoções**
 - 📚 Biblioteca personalizada para cada usuário
 - 📊 Precificação com histórico de compra
 
@@ -36,7 +36,7 @@ O **FGC** simula uma **loja virtual de jogos digitais** com recursos completos d
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/)
 - [JWT Bearer Authentication](https://jwt.io/)
-
+- [Deals](https://gg.deals/)
 ---
 
 ## 🚀 Como Executar o Projeto
@@ -50,17 +50,18 @@ cd FGC-Challenge
 
 dotnet restore
 ```
-
-# 👤 Autenticação no SQL Server
+# 🌐 Configuração de Host
+- 👤 Autenticação no SQL Server
+  
 SQLSERVER_USER=seu_usuario
 SQLSERVER_PASSWORD=sua_senha_segura
 
-# 🗃️ Banco de Dados
+- 🗃️ Banco de Dados
 SQLSERVER_DB=FGC_Games
-
-# 🌐 Configuração de Host
 SQLSERVER_HOST=localhost
 SQLSERVER_PORT=1433
+
+Alterar no Arquivo AppsettingsDevelop.json
 
 "ConnectionStrings": {
   "DefaultConnection": "Server=localhost,1433;Database=FGC_Games;User Id=seu_usuario;Password=sua_senha_segura;TrustServerCertificate=True;"
@@ -68,7 +69,7 @@ SQLSERVER_PORT=1433
 
 dotnet run --project ./src/FGC.Api
 
-Dados inseridos:
+## Dados inseridos:
 👤 Usuários
 adminnew@fiapgames.com (Admin)
 usernew@fiapgames.com (Usuário comum)
@@ -89,11 +90,11 @@ Registros de jogos comprados, com preço pago e data de compra
 
 👤 Usuário Comum
 Email: usernew@fiapgames.com
-Senha: 1Games@
+Senha: 1GamesTeste@
 
 👑 Usuário Administrador
 Email: adminnew@fiapgames.com
 Senha: 1GamesAdmin@
 
-📄 Documentação
+## 📄 Documentação
 🛠️ Documentação Técnica (em breve)
