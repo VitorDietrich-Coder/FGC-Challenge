@@ -17,7 +17,7 @@ namespace FGC.Domain.Entities.Users
             GameId = gameId;
             DateOfPurchase = new DateUtc(purchaseDate);
             FinalPrice = new CurrencyAmount(pricePaid);
-            CreatedAt = new DateUtc(DateTime.UtcNow);
+            CreatedAt = new DateUtc(DateTime.Now);
         }
 
         public int GameId { get; set; }

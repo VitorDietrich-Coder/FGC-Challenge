@@ -4,20 +4,20 @@ using IAggregateRoot = FGC.Domain.Core.IAggregateRoot;
 using FGC.Domain.Common.ValueObjects;
 using FGC.Domain.Entities.Games;
 
-namespace FGC.Domain.Entities.Sales
+namespace FGC.Domain.Entities.Deals
 {
-    public class Sale : Entity, IAggregateRoot
+    public class Deal : Entity, IAggregateRoot
     {
-        public Sale()
+        public Deal()
         {
         }
 
-        public Sale(decimal discount, DateTime startDate, DateTime endDate, string description)
+        public Deal(decimal discount, DateTime startDate, DateTime endDate, string description)
         {
             Discount = new CurrencyAmount(discount);
             StartDate = new DateUtc(startDate);
             ExpirationDate = new DateUtc(endDate);
-            CreatedAt = new DateUtc(DateTime.UtcNow);
+            CreatedAt = DateTime.Now;
             Description = description;
         }
 
@@ -30,19 +30,21 @@ namespace FGC.Domain.Entities.Sales
 
         public virtual ICollection<Game> Games { get; set; } = [];
 
-        public void UpdateDiscount(decimal? discount, DateTime? endDate)
+        public void UpdateDiscount(decimal? discount, DateTime? endDate, DateTime updateAt)
         {
             if (discount.HasValue)
                 Discount = new CurrencyAmount(discount.Value);
 
             if (endDate.HasValue)
                 ExpirationDate = new DateUtc(endDate.Value);
+
+            updateAt = DateTime.UtcNow;
         }
 
         public void ValidatePeriod()
         {
             if (ExpirationDate <= StartDate.Value)
-                throw new BusinessRulesException("Sale end date cannot be earlier than the start date.");
+                throw new BusinessRulesException("deal end date cannot be earlier than the start date.");
         }
 
         public bool IsExpired() => ExpirationDate < DateTime.UtcNow;

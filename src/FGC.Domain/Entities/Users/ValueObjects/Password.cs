@@ -1,4 +1,5 @@
-﻿using Abp.Domain.Values;
+﻿using Abp.Collections.Extensions;
+using Abp.Domain.Values;
 using FGC.Domain.Core.Exceptions;
 
 
@@ -19,7 +20,13 @@ namespace FGC.Domain.Entities.Users.ValueObjects
 
             Hash = HashPassword(password);
         }
+        public Password(string hash, bool isHashed)
+        {
+            if (string.IsNullOrWhiteSpace(hash))
+                throw new ArgumentException("Hash cannot be null or empty.", nameof(hash));
 
+            Hash = hash;
+        }
 
         public bool Challenge(string password)
         {
@@ -31,6 +38,9 @@ namespace FGC.Domain.Entities.Users.ValueObjects
 
         private static void ValidatePasswordStrength(string password)
         {
+            if(password.IsNullOrEmpty())
+                throw new BusinessRulesException("Password is not null");
+
             if (password.Length < 8 || password.Length > 100)
                 throw new BusinessRulesException("Password must be between 8 and 100 characters.");
 
