@@ -24,7 +24,7 @@ O **FGC** simula uma **loja virtual de jogos digitais** com recursos completos d
 
 - 🔐 Login e autenticação com **JWT**
 - 🎮 Cadastro e listagem de jogos
-- 💸 Aplicação de **promoções dinâmicas**
+- 💸 Aplicação de **promoções**
 - 📚 Biblioteca personalizada para cada usuário
 - 📊 Precificação com histórico de compra
 
@@ -68,7 +68,7 @@ SQLSERVER_PORT=1433
 
 dotnet run --project ./src/FGC.Api
 
-Dados inseridos:
+## Dados inseridos:
 👤 Usuários
 adminnew@fiapgames.com (Admin)
 usernew@fiapgames.com (Usuário comum)
@@ -89,11 +89,11 @@ Registros de jogos comprados, com preço pago e data de compra
 
 👤 Usuário Comum
 Email: usernew@fiapgames.com
-Senha: 1Games@
+Senha: 1GamesTeste@
 
 👑 Usuário Administrador
 Email: adminnew@fiapgames.com
 Senha: 1GamesAdmin@
 
-📄 Documentação
+## 📄 Documentação
 🛠️ Documentação Técnica (em breve)
