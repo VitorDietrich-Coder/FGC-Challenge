@@ -1,13 +1,13 @@
 ﻿using FGC.Application.Common;
-using FGC.Application.Sales.Models.Response;
+using FGC.Application.Deals.Models.Response;
 using FGC.Domain.Common.ValueObjects;
 using FGC.Domain.Entities.Games;
-using FGC.Domain.Entities.Sales;
+using FGC.Domain.Entities.Deals;
 using Microsoft.EntityFrameworkCore;
 
-namespace FGC.Application.Sales.Commands.CreateSale
+namespace FGC.Application.Deals.Commands.CreateDeal
 {
-    public class CreateSaleCommand : IRequest<SaleResponse>
+    public class CreateDealCommand : IRequest<DealResponse>
     {
         public decimal Discount { get; set; }
         public DateTime ExpirationDate { get; set; }
@@ -15,19 +15,19 @@ namespace FGC.Application.Sales.Commands.CreateSale
         public string Description { get; set; }
     }
 
-    public class CreateSaleCommandHandler : IRequestHandler<CreateSaleCommand, SaleResponse>
+    public class CreateDealCommandHandler : IRequestHandler<CreateDealCommand, DealResponse>
     {
         private readonly IApplicationDbContext _context;
 
-        public CreateSaleCommandHandler(IApplicationDbContext context)
+        public CreateDealCommandHandler(IApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<SaleResponse> Handle(CreateSaleCommand request,
+        public async Task<DealResponse> Handle(CreateDealCommand request,
             CancellationToken cancellationToken)
         {
-             var sale = new Sale()
+             var deal = new Deal()
              {
                 Discount = new CurrencyAmount(request.Discount, "BRL"),
                 ExpirationDate = new DateUtc(request.ExpirationDate),
@@ -35,7 +35,7 @@ namespace FGC.Application.Sales.Commands.CreateSale
                 Description = request.Description,
              };
 
-            _context.Sales.Add(sale);
+            _context.Deals.Add(deal);
             await _context.SaveChangesAsync(cancellationToken);
 
             var validIds = request.GameId
@@ -53,7 +53,7 @@ namespace FGC.Application.Sales.Commands.CreateSale
                      continue;
                 }
 
-                game.SaleID = sale.Id;
+                game.DealId = deal.Id;
                 games.Add(game);
             }
 
@@ -64,7 +64,7 @@ namespace FGC.Application.Sales.Commands.CreateSale
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return (SaleResponse)sale;
+            return (DealResponse)deal;
         }
     }
 }

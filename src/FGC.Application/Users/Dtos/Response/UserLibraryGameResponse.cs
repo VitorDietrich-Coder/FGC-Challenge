@@ -12,6 +12,7 @@ namespace FGC.Application.Users.Models.Response
         public decimal FinalPrice { get; set; }
         public string PurchaseCurrency { get; set; } = null!;
         public DateTime PurchaseDate { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public static explicit operator UserLibraryGameResponse(UserGameLibrary libraryGame)
         {
@@ -24,7 +25,8 @@ namespace FGC.Application.Users.Models.Response
                 BaseCurrency = libraryGame.Game.Price.Currency,
                 FinalPrice = libraryGame.FinalPrice.Value,
                 PurchaseCurrency = libraryGame.FinalPrice.Currency,
-                PurchaseDate = libraryGame.DateOfPurchase
+                PurchaseDate = libraryGame.DateOfPurchase,
+                CreatedAt = libraryGame.CreatedAt,
             };
         }
     }

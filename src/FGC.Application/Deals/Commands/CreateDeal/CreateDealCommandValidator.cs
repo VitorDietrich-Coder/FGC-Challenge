@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 
-namespace FGC.Application.Sales.Commands.CreateSale
+namespace FGC.Application.Deals.Commands.CreateDeal
 {
     
-    public class CreateSaleCommandValidator : AbstractValidator<CreateSaleCommand>
+    public class CreatedealCommandValidator : AbstractValidator<CreateDealCommand>
     {
-        public CreateSaleCommandValidator()
+        public CreatedealCommandValidator()
         {
             RuleFor(x => x.Discount)
                 .NotEmpty().WithMessage("Discount is required.")

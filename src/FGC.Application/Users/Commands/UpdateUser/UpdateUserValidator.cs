@@ -36,10 +36,9 @@ namespace FGC.Application.Users.Commands.UpdateUser
                 .When(x => x.TypeUser.HasValue);
             
             RuleFor(x => x.DateOfBirth)
-                .NotEmpty()
-                .WithMessage("Date of birth is required.")
-                .LessThan(DateTime.Today)
-                .WithMessage("Date of birth must be in the past.")
+                .Empty()
+                .LessThanOrEqualTo(DateTime.Today.AddYears(-18))
+                .WithMessage("You must be at least 18 years old.")
                 .GreaterThan(DateTime.Today.AddYears(-120))
                 .WithMessage("Date of birth must be within the last 120 years.");
 

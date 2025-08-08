@@ -23,7 +23,12 @@ namespace FGC.Application.Games.Queries.GetGames
         public async Task<GameResponse> Handle(GetGameByIdQuery request,
             CancellationToken cancellationToken)
         {
-            var entity = await _context.Games.Where(x => x.Id == request.Id).FirstAsync();
+            var entity = await _context.Games.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
+
+            if (entity == null)
+            {
+                throw new NotFoundException(nameof(Games), request.Id.ToString());
+            }
 
             return (GameResponse)entity;
         }

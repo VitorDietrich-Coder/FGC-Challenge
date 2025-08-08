@@ -12,7 +12,7 @@ namespace FGC.Application.Games.Commands.CreateGame
         public string Name { get; set; }
         public string Category { get; set; }
         public decimal Price { get; set; }
-        public int? SaleId { get; set; }
+        public int? DealId { get; set; }
     }
 
     public class CreateGameCommandHandler
@@ -31,7 +31,7 @@ namespace FGC.Application.Games.Commands.CreateGame
             var game = new Game
             {
                 Name = request.Name,
-                SaleID = request.SaleId,
+                DealId = request.DealId,
                 Category = request.Category,
                 Price = new CurrencyAmount(request.Price),
             };

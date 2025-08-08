@@ -10,10 +10,10 @@ namespace FGC.Application.Users.Models.Response
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
-
         public string Email { get; set; }
         public UserType Type { get; set; }
         public bool Active { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public static explicit  operator UserResponse(User user)
         {
@@ -24,7 +24,8 @@ namespace FGC.Application.Users.Models.Response
                 Username = user.Username,
                 Email = user.Email.Address,
                 Type = user.TypeUser,
-                Active = user.Active
+                Active = user.Active,
+                DateOfBirth = user.DateOfBirth
             };
         }
     }   

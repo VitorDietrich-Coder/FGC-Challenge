@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 
-namespace FGC.Application.Sales.Commands.UpdateSale
+namespace FGC.Application.Deals.Commands.UpdateDeal
 {
     
-    public class UpdateSaleCommandValidator : AbstractValidator<UpdateSaleCommand>
+    public class UpdateDealCommandValidator : AbstractValidator<UpdateDealCommand>
     {
-        public UpdateSaleCommandValidator() 
+        public UpdateDealCommandValidator() 
         { 
             When(x => x.Discount != null, () =>
             {

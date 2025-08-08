@@ -9,7 +9,7 @@ namespace FGC.Application.Games.Models.Response
         public string Name { get; set; }
         public string Category { get; set; }
         public decimal Price { get; set; }
-        public int? SaleID { get; set; }
+        public int? DealId { get; set; }
 
         public static explicit operator GameResponse(Game game)
         {
@@ -19,7 +19,7 @@ namespace FGC.Application.Games.Models.Response
                 Name = game.Name,
                 Category = game.Category,
                 Price = game.Price.Value,
-                SaleID = game.SaleID
+                DealId = game.DealId
             };
         }
     }

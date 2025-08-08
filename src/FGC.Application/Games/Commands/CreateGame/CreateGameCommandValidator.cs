@@ -44,10 +44,10 @@ namespace FGC.Application.Games.Commands.CreateGame
                 .LessThanOrEqualTo(1000)
                 .WithMessage("Price must be less than or equal to 1000.");
 
-            RuleFor(x => x.SaleId)
+            RuleFor(x => x.DealId)
                 .GreaterThan(0)
-                .When(x => x.SaleId.HasValue)
-                .WithMessage("SaleId must be greater than 0 when provided.");
+                .When(x => x.DealId.HasValue)
+                .WithMessage("dealId must be greater than 0 when provided.");
         }
     }
 }

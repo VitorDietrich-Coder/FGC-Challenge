@@ -33,7 +33,8 @@ public class GetGamesByUserQueryCommandHandler
                BaseCurrency = lg.Game.Price.Currency,
                FinalPrice = lg.FinalPrice.Value,
                PurchaseCurrency = lg.FinalPrice.Currency,
-               PurchaseDate = lg.DateOfPurchase
+               PurchaseDate = lg.DateOfPurchase,
+               CreatedAt = lg.CreatedAt,
            })
            .ToListAsync();
 

@@ -3,15 +3,15 @@
 namespace FGC.Application.Auth.Commands
 {
     
-    public class LoginValidator : AbstractValidator<LoginCommand>
+    public class LoginCommandValidator : AbstractValidator<LoginCommand>
     {
-        public LoginValidator()
+        public LoginCommandValidator()
         {
             RuleFor(x => x.Email)
               .NotEmpty()
-              .WithMessage("Username is required.")
+              .WithMessage("Email is required.")
               .EmailAddress()
-              .WithMessage("Username must be a valid email address.");
+              .WithMessage("Email must be a valid email address.");
 
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("Password is required.");           

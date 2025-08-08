@@ -3,9 +3,9 @@ using FGC.Domain.Entities.Games;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
-namespace FGC.Application.Sales.Commands.UpdateSale;
+namespace FGC.Application.Deals.Commands.UpdateDeal;
 
-public class UpdateSaleCommand : IRequest
+public class UpdateDealCommand : IRequest
 {
     [JsonIgnore]
     public int Id { get; set; } 
@@ -15,30 +15,30 @@ public class UpdateSaleCommand : IRequest
     public string Description { get; set; }
 }
 
-public class UpdateSaleCommandHandler
-    : AsyncRequestHandler<UpdateSaleCommand>
+public class UpdateDealCommandHandler
+    : AsyncRequestHandler<UpdateDealCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public UpdateSaleCommandHandler(IApplicationDbContext context)
+    public UpdateDealCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    protected override async Task Handle(UpdateSaleCommand request,
+    protected override async Task Handle(UpdateDealCommand request,
         CancellationToken cancellationToken)
     {
-        var sale = await _context.Sales.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
+        var deal = await _context.Deals.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
 
-        if (sale == null)
+        if (deal == null)
         {
-            throw new KeyNotFoundException("Sale not found.");
+            throw new KeyNotFoundException("Deal not found.");
         }
 
-        sale.Description = request.Description;
-        sale.UpdateDiscount(request.Discount, request.ExpirationDate);
+        deal.Description = request.Description;
+        deal.UpdateDiscount(request.Discount, request.ExpirationDate, DateTime.UtcNow);
        
-        _context.Sales.Update(sale);
+        _context.Deals.Update(deal);
         await _context.SaveChangesAsync(cancellationToken);
 
 
@@ -60,7 +60,7 @@ public class UpdateSaleCommandHandler
                 continue;
             }
 
-            game.UpdateSale(sale.Id);
+            game.UpdateDeal(deal.Id);
             games.Add(game);
         }
 

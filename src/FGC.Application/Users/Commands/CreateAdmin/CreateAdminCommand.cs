@@ -12,8 +12,7 @@ namespace FGC.Application.Users.Commands.CreateAdmin
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public UserType TypeUser { get; set; }
-        public bool Active { get; set; }
+        public DateTime? DateOfBirth { get; set; }
     }
 
     public class CreateAdminCommandHandler : IRequestHandler<CreateAdminCommand, UserResponse>
@@ -32,10 +31,12 @@ namespace FGC.Application.Users.Commands.CreateAdmin
             {
                 Name = request.Name,
                 Username = request.Username,
-                 Email = new Email(request.Email),
+                Email = new Email(request.Email),
                 Password = new Password(request.Password),
-                TypeUser = UserType.Admin
-            };
+                TypeUser = UserType.Admin,
+                Active = true,
+                DateOfBirth = request.DateOfBirth,
+             };
              
             _context.Users.Add(user);
 

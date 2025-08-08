@@ -21,8 +21,12 @@ public class GetUserQueryCommandHandler
     public async Task<UserResponse> Handle(GetUserQuery request,
         CancellationToken cancellationToken)
     {
-        var entity = await _context.Users.Where(x => x.Id == request.Id).FirstAsync();
- 
+        var entity = await _context.Users.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
+
+        if (entity == null)
+        {
+            throw new NotFoundException(nameof(Users), request.Id.ToString());
+        }
         return (UserResponse)entity;
     }
 }
