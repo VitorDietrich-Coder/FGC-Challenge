@@ -1,0 +1,57 @@
+﻿using FGC.Application.Services.Data;
+using FGC.Domain.Common;
+using FGC.Domain.Core;
+using Microsoft.EntityFrameworkCore;
+
+using System.Linq.Expressions;
+
+namespace FGC.Infra.Data.Repositories.Base
+{
+    
+
+    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    {
+        private readonly ApplicationDbContext _context;
+
+        public BaseRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<TEntity>()
+                .FindAsync(new object[] { id }, cancellationToken);
+        }
+
+        public async Task<List<TEntity>> ListAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<TEntity>()
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<List<TEntity>> ListAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<TEntity>()
+                .Where(predicate)
+                .ToListAsync(cancellationToken);
+        }
+
+        public void Add(TEntity entity)
+        {
+            _context.Set<TEntity>().Add(entity);
+        }
+
+        public void Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Update(entity);
+        }
+
+        public void Delete(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
+
+        }
+    }
+
+}
