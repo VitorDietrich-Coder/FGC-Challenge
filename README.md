@@ -36,7 +36,7 @@ O **FGC** simula uma **loja virtual de jogos digitais** com recursos completos d
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/)
 - [JWT Bearer Authentication](https://jwt.io/)
-
+- [Deals](https://gg.deals/)
 ---
 
 ## 🚀 Como Executar o Projeto
