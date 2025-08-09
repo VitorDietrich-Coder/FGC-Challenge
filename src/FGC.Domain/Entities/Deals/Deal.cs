@@ -15,15 +15,15 @@ namespace FGC.Domain.Entities.Deals
         public Deal(decimal discount, DateTime startDate, DateTime endDate, string description)
         {
             Discount = new CurrencyAmount(discount);
-            StartDate = new DateUtc(startDate);
-            ExpirationDate = new DateUtc(endDate);
-            CreatedAt = DateTime.Now;
+            StartDate = startDate;
+            ExpirationDate = endDate;
+            CreatedAt = DateTime.UtcNow;
             Description = description;
         }
 
         public CurrencyAmount Discount { get; set; }
-        public DateUtc StartDate { get; set; }
-        public DateUtc ExpirationDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
@@ -36,14 +36,14 @@ namespace FGC.Domain.Entities.Deals
                 Discount = new CurrencyAmount(discount.Value);
 
             if (endDate.HasValue)
-                ExpirationDate = new DateUtc(endDate.Value);
+                ExpirationDate = endDate.Value;
 
             updateAt = DateTime.UtcNow;
         }
 
         public void ValidatePeriod()
         {
-            if (ExpirationDate <= StartDate.Value)
+            if (ExpirationDate <= StartDate)
                 throw new BusinessRulesException("deal end date cannot be earlier than the start date.");
         }
 

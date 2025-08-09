@@ -24,7 +24,7 @@ namespace FGC.Domain.Entities.Games
             Category = category;
             Price = new CurrencyAmount(price, currency);
             DealId = dealId;
-            CreatedAt = new DateUtc(DateTime.UtcNow);
+            CreatedAt = DateTime.UtcNow;
         }
 
         public Game() { }
