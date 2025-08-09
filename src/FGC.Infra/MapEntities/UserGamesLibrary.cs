@@ -20,10 +20,6 @@ namespace FGC.Infra.Data.MapEntities
                    .HasDatabaseName("GamesLibraryUserId");
 
             builder.Property(x => x.DateOfPurchase)
-                   .HasConversion(
-                       v => v.Value,
-                       v => new DateUtc(v) 
-                   )
                    .IsRequired();
 
             builder.OwnsOne(x => x.FinalPrice, price =>

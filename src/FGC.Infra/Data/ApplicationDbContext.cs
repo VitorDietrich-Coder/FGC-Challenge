@@ -44,26 +44,6 @@ public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
         builder.ApplyConfiguration(new Deals());
         builder.ApplyConfiguration(new Games());
         builder.ApplyConfiguration(new UserGamesLibrary());
-
-        // Configuração direta do ValueConverter para UtcDate em deal
-        var utcDateConverter = new ValueConverter<DateUtc, DateTime>(
-            v => v.Value,
-            v => new DateUtc(DateTime.SpecifyKind(v, DateTimeKind.Utc))
-        );
-
-        var converter = new ValueConverter<DateTime, DateTime>(
-            v => DateTime.SpecifyKind(v, DateTimeKind.Utc),  // Ao salvar
-            v => DateTime.SpecifyKind(v, DateTimeKind.Utc)); // Ao ler
-
-        builder.Entity<UserGameLibrary>()
-            .Property(e => e.DateOfPurchase)
-            .HasConversion(utcDateConverter);
-
-        builder.Entity<Deal>(entity =>
-        {
-            entity.Property(s => s.StartDate).HasConversion(utcDateConverter);
-            entity.Property(s => s.ExpirationDate).HasConversion(utcDateConverter);
-        });
     }
 
 }

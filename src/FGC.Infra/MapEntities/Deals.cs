@@ -30,15 +30,9 @@ namespace FGC.Infra.Data.MapEntities
                 .HasMaxLength(100);
 
             builder.Property(p => p.StartDate)
-                   .HasConversion(
-                       v => v.Value,
-                       v => new DateUtc(v))
                    .IsRequired();
 
             builder.Property(p => p.ExpirationDate)
-                   .HasConversion(
-                       v => v.Value,
-                       v => new DateUtc(v))
                    .IsRequired();
 
             builder.Property(u => u.CreatedAt)

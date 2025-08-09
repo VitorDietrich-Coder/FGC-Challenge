@@ -28,9 +28,6 @@ namespace FGC.Infra.Data.MapEntities
                    .IsRequired()
                    .HasDefaultValue(true);
 
-            builder.Property(u => u.DateOfBirth)
-                   .IsRequired(false);
-
             builder.Property(u => u.CreatedAt)
                    .IsRequired();
 
@@ -60,7 +57,7 @@ namespace FGC.Infra.Data.MapEntities
 
                 email.HasIndex(e => e.Address)
                      .IsUnique()
-                     .HasDatabaseName("Users_Email");
+                     .HasDatabaseName("UsersEmail");
             });
         }
     }

@@ -161,8 +161,8 @@ public class ApplicationDbContextInitialiser
                 new Deal
 				{
                     Id = 1,
-                    StartDate = new DateUtc(DateTime.SpecifyKind(new DateTime(2025, 06, 01), DateTimeKind.Utc)),
-                    ExpirationDate = new DateUtc(DateTime.SpecifyKind(new DateTime(2026, 03, 01), DateTimeKind.Utc)),
+                    StartDate = DateTime.SpecifyKind(new DateTime(2025, 06, 01), DateTimeKind.Utc),
+                    ExpirationDate = DateTime.SpecifyKind(new DateTime(2026, 03, 01), DateTimeKind.Utc),
                     Description = "deal of Moba Games",
                     Discount = new CurrencyAmount(25 ,"BRL"),
                     CreatedAt = new DateTime(2025, 8, 2, 20, 0, 0, DateTimeKind.Utc),
@@ -170,8 +170,8 @@ public class ApplicationDbContextInitialiser
                 new Deal
 				{
                     Id = 2,
-                    StartDate = new DateUtc(DateTime.SpecifyKind(new DateTime(2025, 06, 01), DateTimeKind.Utc)),
-                    ExpirationDate = new DateUtc(DateTime.SpecifyKind(new DateTime(2026, 04, 01), DateTimeKind.Utc)),
+                    StartDate =  DateTime.SpecifyKind(new DateTime(2025, 06, 01), DateTimeKind.Utc),
+                    ExpirationDate =  DateTime.SpecifyKind(new DateTime(2026, 04, 01), DateTimeKind.Utc),
                     Description = "deal of FPS Games",
                     Discount = new CurrencyAmount(15 ,"BRL"),
                     CreatedAt = new DateTime(2025, 8, 2, 20, 0, 0, DateTimeKind.Utc),
@@ -179,8 +179,8 @@ public class ApplicationDbContextInitialiser
                 new Deal
 				{
                     Id = 3,
-                    StartDate = new DateUtc(DateTime.SpecifyKind(new DateTime(2025, 07, 01), DateTimeKind.Utc)),
-                    ExpirationDate = new DateUtc(DateTime.SpecifyKind(new DateTime(2026, 10, 01), DateTimeKind.Utc)),
+                    StartDate = DateTime.SpecifyKind(new DateTime(2025, 07, 01), DateTimeKind.Utc),
+                    ExpirationDate = DateTime.SpecifyKind(new DateTime(2026, 10, 01), DateTimeKind.Utc),
                     Description = "deal of RPG Games",
                     Discount = new CurrencyAmount(10 ,"BRL"),
                     CreatedAt  = new DateTime(2025, 8, 2, 20, 0, 0, DateTimeKind.Utc),
@@ -210,7 +210,6 @@ public class ApplicationDbContextInitialiser
                     Username = "adminnew",
                     TypeUser = UserType.Admin,
                     Active = true,
-                    DateOfBirth = new DateTime(1985, 1, 1),
                     Email = new Email("adminnew@fiapgames.com"),
                     Password = new Password("1GamesAdmin@"),
                     CreatedAt = new DateTime(2025, 8, 2, 20, 0, 0, DateTimeKind.Utc)
@@ -223,7 +222,6 @@ public class ApplicationDbContextInitialiser
                     Username = "usernew",
                     TypeUser = UserType.User,
                     Active = true,
-                    DateOfBirth = new DateTime(2003, 6, 15),
                     Email = new Email("usernew@fiapgames.com"),
                     Password =  new Password("1GamesTeste@"),
                     CreatedAt = new DateTime(2025, 8, 2, 20, 0, 0, DateTimeKind.Utc)
@@ -239,7 +237,7 @@ public class ApplicationDbContextInitialiser
                 Id = 1,
                 UserId = 1,
                 GameId = 1,
-                DateOfPurchase = new DateUtc(DateTime.SpecifyKind(new DateTime(2026, 04, 01), DateTimeKind.Utc)),
+                DateOfPurchase = DateTime.SpecifyKind(new DateTime(2026, 04, 01), DateTimeKind.Utc),
                 FinalPrice = new CurrencyAmount(20, "BRL"),
             },
             new UserGameLibrary
@@ -247,7 +245,7 @@ public class ApplicationDbContextInitialiser
                 Id = 2,
                 UserId = 2,
                 GameId = 3,
-                DateOfPurchase = new DateUtc(DateTime.SpecifyKind(new DateTime(2026, 05, 01), DateTimeKind.Utc)),
+                DateOfPurchase = DateTime.SpecifyKind(new DateTime(2026, 05, 01), DateTimeKind.Utc),
                 FinalPrice = new CurrencyAmount(20, "BRL"),
 
             },
@@ -256,7 +254,7 @@ public class ApplicationDbContextInitialiser
                 Id = 3,
                 UserId = 1,
                 GameId = 4,
-                DateOfPurchase = new DateUtc(DateTime.SpecifyKind(new DateTime(2026, 06, 01), DateTimeKind.Utc)),
+                DateOfPurchase = DateTime.SpecifyKind(new DateTime(2026, 06, 01), DateTimeKind.Utc),
                 FinalPrice = new CurrencyAmount(20, "BRL"),
             },
         ];
