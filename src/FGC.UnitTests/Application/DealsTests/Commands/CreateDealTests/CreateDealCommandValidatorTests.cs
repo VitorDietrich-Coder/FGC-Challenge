@@ -1,9 +1,8 @@
 ﻿using FGC.Application.Deals.Commands.CreateDeal;
-using FGC.Application.UnitTests;
 using FluentValidation.TestHelper;
 using Xunit;
 
-namespace FGC.UnitTests.Application.DealsTests.Commands.CreateDealTests
+namespace FGC.Application.UnitTests.DealsTests.Commands.CreateDealTests
 {
     public class CreateDealCommandValidatorTests : IClassFixture<TestFixture>
     {

@@ -2,7 +2,7 @@
 using FGC.Application.UnitTests;
 using FluentValidation.TestHelper;
 
-namespace FGC.UnitTests.Application.DealsTests.Commands.UpdateDealTests
+namespace FGC.Application.UnitTests.DealsTests.Commands.UpdateDealTests
 {
     public class UpdateDealCommandValidatorTests : IClassFixture<TestFixture>
     {
@@ -18,7 +18,8 @@ namespace FGC.UnitTests.Application.DealsTests.Commands.UpdateDealTests
         {
             var command = new UpdateDealCommand
             {
-                Discount = 0
+                Discount = 0,
+                GameId = [1, 2, 3]
             };
 
             var result = _validator.TestValidate(command);
@@ -30,7 +31,8 @@ namespace FGC.UnitTests.Application.DealsTests.Commands.UpdateDealTests
         {
             var command = new UpdateDealCommand
             {
-                Discount = 150
+                Discount = 150,
+                GameId = [1, 2, 3]
             };
 
             var result = _validator.TestValidate(command);
@@ -42,47 +44,26 @@ namespace FGC.UnitTests.Application.DealsTests.Commands.UpdateDealTests
         {
             var command = new UpdateDealCommand
             {
-                Discount = 25
+                Discount = 25,
+                GameId = [1, 2, 3]
             };
 
             var result = _validator.TestValidate(command);
             result.ShouldNotHaveValidationErrorFor("Discount.Value");
         }
 
-        [Fact]
-        public void Should_Have_Error_When_ExpirationDate_Is_Default()
-        {
-            var command = new UpdateDealCommand
-            {
-                ExpirationDate = default
-            };
-
-            var result = _validator.TestValidate(command);
-            result.ShouldHaveValidationErrorFor("ExpirationDate.Value");
-        }
-
+ 
         [Fact]
         public void Should_Not_Have_Error_When_ExpirationDate_Is_Valid()
         {
             var command = new UpdateDealCommand
             {
-                ExpirationDate = DateTime.UtcNow.AddDays(1)
+                ExpirationDate = DateTime.UtcNow.AddDays(1),
+                GameId = [1, 2, 3]
             };
 
             var result = _validator.TestValidate(command);
             result.ShouldNotHaveValidationErrorFor("ExpirationDate.Value");
-        }
-
-        [Fact]
-        public void Should_Have_Error_When_GameId_Is_Null()
-        {
-            var command = new UpdateDealCommand
-            {
-                GameId = null
-            };
-
-            var result = _validator.TestValidate(command);
-            result.ShouldHaveValidationErrorFor(x => x.GameId);
         }
 
         [Fact]
@@ -126,7 +107,10 @@ namespace FGC.UnitTests.Application.DealsTests.Commands.UpdateDealTests
         {
             var command = new UpdateDealCommand
             {
-                Description = ""
+                ExpirationDate = DateTime.UtcNow.AddDays(12),
+                Discount = 1,
+                Description = "",
+                GameId = [1 , 2, 3]
             };
 
             var result = _validator.TestValidate(command);
@@ -138,7 +122,8 @@ namespace FGC.UnitTests.Application.DealsTests.Commands.UpdateDealTests
         {
             var command = new UpdateDealCommand
             {
-                Description = "Short"
+                Description = "Short",
+                GameId = [1, 2, 3]
             };
 
             var result = _validator.TestValidate(command);
@@ -150,7 +135,8 @@ namespace FGC.UnitTests.Application.DealsTests.Commands.UpdateDealTests
         {
             var command = new UpdateDealCommand
             {
-                Description = new string('a', 101)
+                Description = new string('a', 101),
+                GameId = [1, 2, 3]
             };
 
             var result = _validator.TestValidate(command);

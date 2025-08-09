@@ -30,18 +30,11 @@
     <ProjectReference Include="..\FGC.Api\FGC.Api.csproj" />
     <ProjectReference Include="..\FGC.Application\FGC.Application.csproj" />
     <ProjectReference Include="..\FGC.Domain\FGC.Domain.csproj" />
+    <ProjectReference Include="..\FGC.Infra\FGC.Infra.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Application\GameTests\Queries\GetAllGames\" />
-    <Folder Include="Application\GameTests\Queries\GetGames\" />
-    <Folder Include="Application\UserTests\Command\DeleteUserTests\" />
-    <Folder Include="Application\UserTests\Command\UpdateUserTests\" />
-    <Folder Include="Application\UserTests\Queries\" />
   </ItemGroup>
 
 </Project>
