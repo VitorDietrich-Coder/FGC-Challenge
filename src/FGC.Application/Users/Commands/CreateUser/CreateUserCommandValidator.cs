@@ -38,14 +38,6 @@ namespace FGC.Application.Users.Commands.CreateUser
                 .Matches(@"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                 .WithMessage("Password must contain at least one letter, one number, and one special character.");
 
-            RuleFor(x => x.DateOfBirth)
-                .NotEmpty()
-                .WithMessage("Date of birth is required.")
-                .LessThanOrEqualTo(DateTime.Today.AddYears(-18))
-                .WithMessage("You must be at least 18 years old.")
-                .GreaterThan(DateTime.Today.AddYears(-120))
-                .WithMessage("Date of birth must be within the last 120 years.");
-
         }
     }
 }

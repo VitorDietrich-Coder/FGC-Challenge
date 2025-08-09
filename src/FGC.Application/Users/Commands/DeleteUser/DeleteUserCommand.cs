@@ -15,7 +15,7 @@ namespace FGC.Application.Users.Commands.DeleteUser
     }
 
     public class DeleteUserCommandHandler
-        : AsyncRequestHandler<DeleteUserCommand>
+        : IRequest<DeleteUserCommand>
     {
         private readonly IApplicationDbContext _context;
 
@@ -24,7 +24,7 @@ namespace FGC.Application.Users.Commands.DeleteUser
             _context = context;
         }
 
-        protected override async Task Handle(DeleteUserCommand request,
+        public async Task Handle(DeleteUserCommand request,
             CancellationToken cancellationToken)
         {
             var entity = await _context.Users

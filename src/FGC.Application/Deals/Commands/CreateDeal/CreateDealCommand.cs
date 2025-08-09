@@ -30,22 +30,22 @@ namespace FGC.Application.Deals.Commands.CreateDeal
              var deal = new Deal()
              {
                 Discount = new CurrencyAmount(request.Discount, "BRL"),
-                ExpirationDate = new DateUtc(request.ExpirationDate),
-                StartDate = new DateUtc(DateTime.UtcNow),
+                ExpirationDate = request.ExpirationDate,
+                StartDate = DateTime.UtcNow,
                 Description = request.Description,
              };
 
             _context.Deals.Add(deal);
             await _context.SaveChangesAsync(cancellationToken);
 
-            var validIds = request.GameId
+            var gameIdValid = request.GameId
                  .Where(id => id.HasValue)
                  .Select(id => id.Value)
                  .ToList();
 
             var games = new List<Game>();
 
-            foreach (var gameId in validIds)
+            foreach (var gameId in gameIdValid)
             {
                 var game = await _context.Games.Where(x => x.Id == gameId).FirstOrDefaultAsync();
                 if (game is null)

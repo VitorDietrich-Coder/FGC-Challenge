@@ -15,12 +15,11 @@ namespace FGC.Application.Users.Commands.UpdateUser
         public string? Email { get; set; }
         public string? Password { get; set; }
         public UserType? TypeUser { get; set; }
-        public DateTime DateOfBirth { get; set; }
         public bool? Active { get; set; }
     }
 
     public class UpdateUserCommandHandler
-        : AsyncRequestHandler<UpdateUserCommand>
+        : IRequest<UpdateUserCommand>
     {
         private readonly IApplicationDbContext _context;
 
@@ -29,21 +28,20 @@ namespace FGC.Application.Users.Commands.UpdateUser
             _context = context;
         }
 
-        protected override async Task Handle(UpdateUserCommand request,
+        public async Task Handle(UpdateUserCommand request,
             CancellationToken cancellationToken)
         {
             var entity = await _context.Users
-                .FindAsync(new object[] { request.Name }, cancellationToken);
+                .FindAsync(new object[] { request.Id }, cancellationToken);
 
-            Guard.Against.NotFound(request.Name, entity);
+            Guard.Against.NotFound(request.Id, entity);
 
             entity.Name = request.Name;
             entity.Email = new Email(request.Email);
             entity.Password = new Password(request.Password);
             entity.TypeUser = (UserType)request.TypeUser;
             entity.Active = (bool)request.Active;
-            entity.DateOfBirth = request.DateOfBirth;
-            entity.UpdatedAt = new DateUtc(DateTime.UtcNow);
+            entity.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync(cancellationToken);
         }

@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace FGC.Application.Deals.Commands.UpdateDeal;
 
-public class UpdateDealCommand : IRequest
+public class UpdateDealCommand : IRequest<Unit>
 {
     [JsonIgnore]
     public int Id { get; set; } 
@@ -16,7 +16,7 @@ public class UpdateDealCommand : IRequest
 }
 
 public class UpdateDealCommandHandler
-    : AsyncRequestHandler<UpdateDealCommand>
+    : IRequestHandler<UpdateDealCommand, Unit>
 {
     private readonly IApplicationDbContext _context;
 
@@ -25,7 +25,7 @@ public class UpdateDealCommandHandler
         _context = context;
     }
 
-    protected override async Task Handle(UpdateDealCommand request,
+    public async Task<Unit> Handle(UpdateDealCommand request,
         CancellationToken cancellationToken)
     {
         var deal = await _context.Deals.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
@@ -48,7 +48,7 @@ public class UpdateDealCommandHandler
                .ToList();
 
         if (validIds == null || validIds.Count == 0)
-              return;
+              return new Unit();
 
         var games = new List<Game>();
 
@@ -68,5 +68,7 @@ public class UpdateDealCommandHandler
              _context.Games.UpdateRange(games);
 
         await _context.SaveChangesAsync(cancellationToken);
+
+        return new Unit();
     }
 }

@@ -34,6 +34,8 @@ public class GetGamesByUserQueryCommandHandler
                FinalPrice = lg.FinalPrice.Value,
                PurchaseCurrency = lg.FinalPrice.Currency,
                PurchaseDate = lg.DateOfPurchase,
+               DiscountAmount = lg.Game.Price.Value - lg.FinalPrice.Value,
+               DiscountPercentage = (1 - (lg.FinalPrice.Value / lg.Game.Price.Value)) * 100,
                CreatedAt = lg.CreatedAt,
            })
            .ToListAsync();

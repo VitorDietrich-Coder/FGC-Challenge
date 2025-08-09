@@ -12,7 +12,6 @@ namespace FGC.Application.Users.Commands.CreateUser
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public DateTime DateOfBirth { get; set; }
     }
 
     public class CreateUserCommandHandler
@@ -36,8 +35,7 @@ namespace FGC.Application.Users.Commands.CreateUser
                 Password = new Password(request.Password),
                 Username = request.Username,
                 TypeUser = UserType.User,
-                DateOfBirth = request.DateOfBirth,
-                Active = true,
+                Active = false,
             };
              
             _context.Users.Add(user);

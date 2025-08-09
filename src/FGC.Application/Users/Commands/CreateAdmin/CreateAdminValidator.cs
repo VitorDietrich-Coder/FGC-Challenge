@@ -14,7 +14,6 @@ namespace FGC.Application.Users.Commands.CreateAdmin
                 .WithMessage("Name must be less than or equal to 100 characters.");
 
             RuleFor(x => x.Username)
-                .Empty()
                 .MaximumLength(100)
                 .WithMessage("Name must be less than or equal to 100 characters.");
 
@@ -35,13 +34,6 @@ namespace FGC.Application.Users.Commands.CreateAdmin
                 .WithMessage("Password must be less than or equal to 100 characters.")
                 .Matches(@"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                 .WithMessage("Password must contain at least one letter, one number, and one special character.");
-
-            RuleFor(x => x.DateOfBirth)
-                .LessThanOrEqualTo(DateTime.Today.AddYears(-18))
-                .WithMessage("You must be at least 18 years old.")
-                .GreaterThan(DateTime.Today.AddYears(-120))
-                .WithMessage("Date of birth must be within the last 120 years.");
-
         }
     }
 }

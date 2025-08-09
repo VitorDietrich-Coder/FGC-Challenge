@@ -12,7 +12,6 @@ namespace FGC.Application.Users.Commands.CreateAdmin
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public DateTime? DateOfBirth { get; set; }
     }
 
     public class CreateAdminCommandHandler : IRequestHandler<CreateAdminCommand, UserResponse>
@@ -35,7 +34,6 @@ namespace FGC.Application.Users.Commands.CreateAdmin
                 Password = new Password(request.Password),
                 TypeUser = UserType.Admin,
                 Active = true,
-                DateOfBirth = request.DateOfBirth,
              };
              
             _context.Users.Add(user);

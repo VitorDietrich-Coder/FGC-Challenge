@@ -35,13 +35,6 @@ namespace FGC.Application.Users.Commands.UpdateUser
                 .WithMessage("Type must be a valid enum value.")
                 .When(x => x.TypeUser.HasValue);
             
-            RuleFor(x => x.DateOfBirth)
-                .Empty()
-                .LessThanOrEqualTo(DateTime.Today.AddYears(-18))
-                .WithMessage("You must be at least 18 years old.")
-                .GreaterThan(DateTime.Today.AddYears(-120))
-                .WithMessage("Date of birth must be within the last 120 years.");
-
             RuleFor(x => x.Active)
                 .NotNull()
                 .WithMessage("Active status is required.")
