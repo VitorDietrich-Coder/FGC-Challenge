@@ -16,7 +16,6 @@ namespace FGC.Api.SwaggerExamples.Users
                 Password = "Password456!",
                 TypeUser = UserType.Admin,
                 Active = false,
-                DateOfBirth = DateTime.UtcNow,
             };
         }
     }
