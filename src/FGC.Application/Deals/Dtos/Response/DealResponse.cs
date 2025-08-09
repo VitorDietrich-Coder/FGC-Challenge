@@ -11,7 +11,6 @@ namespace FGC.Application.Deals.Models.Response
         public DateTime StartDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public string Description { get; set; }
-        public List<Game>? Games { get; set; }
 
 
         public static explicit operator DealResponse(Deal deal)
@@ -23,7 +22,6 @@ namespace FGC.Application.Deals.Models.Response
                 StartDate = deal.StartDate,
                 ExpirationDate = deal.ExpirationDate,
                 Description = deal.Description,
-                Games = deal.Games.ToList()
             };
         }
     }

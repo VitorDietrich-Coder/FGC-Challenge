@@ -12,6 +12,10 @@ namespace FGC.Application.Users.Commands.UpdateUser
                 .WithMessage("Name must be less than or equal to 100 characters.")
                 .When(x => !string.IsNullOrEmpty(x.Name));
 
+            RuleFor(x => x.Username)
+                .MaximumLength(100)
+                .WithMessage("Name must be less than or equal to 100 characters.");
+
             RuleFor(x => x.Email)
                 .EmailAddress()
                 .WithMessage("Email must be a valid email address.")

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FGC.Application.Users.Commands.DeleteUser
 {
-    public class DeleteUserCommand : IRequest
+    public class DeleteUserCommand : IRequest<Unit>
     {
         public int Id { get; set; }
     }

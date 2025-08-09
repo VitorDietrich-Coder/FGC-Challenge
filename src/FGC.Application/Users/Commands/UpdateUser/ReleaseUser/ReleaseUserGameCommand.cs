@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FGC.Application.Users.Commands.UpdateUser.ReleaseUserGame
 {
-    public class ReleaseUserGameCommand : IRequest
+    public class ReleaseUserGameCommand : IRequest<Unit>
     {
         [JsonIgnore]
         public int UserId { get; set; }
@@ -19,7 +19,7 @@ namespace FGC.Application.Users.Commands.UpdateUser.ReleaseUserGame
     }
 
 
-public class ReleaseUserGameCommandHandler : IRequestHandler<ReleaseUserGameCommand>
+public class ReleaseUserGameCommandHandler : IRequestHandler<ReleaseUserGameCommand, Unit>
     {
         private readonly IApplicationDbContext _context;
 
