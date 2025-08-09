@@ -1,7 +1,7 @@
 ﻿using FGC.Domain.Entities.Users;
 using FGC.Domain.Entities.Users.Enums;
 
-namespace FGC.Unit.Tests.Domain.Entities
+namespace FGC.UnitTests.Domain.Entities
 {
     public class UserGamesLibraryTest
     {

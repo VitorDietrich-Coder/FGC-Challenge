@@ -66,11 +66,10 @@ namespace FGC.Api.Controllers
         )]
         [SwaggerResponseProfile("User.Update")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> UpdateAsync(int id, [FromBody] UpdateUserCommand command)
+        public async Task<ActionResult<UserResponse>> UpdateAsync(int id, [FromBody] UpdateUserCommand command)
         {
-            command.Id = id;
-            await Mediator.Send(command);
-            return NoContent();
+           command.Id = id;
+           return await Mediator.Send(command);
         }
 
 

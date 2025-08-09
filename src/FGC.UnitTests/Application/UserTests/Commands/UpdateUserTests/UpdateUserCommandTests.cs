@@ -31,6 +31,7 @@ namespace FGC.UnitTests.Application.UserTests.Commands.UpdateUserTests
             {
                 Id = user.Id,
                 Name = "New Name",
+                Username = "oldusername",
                 Email = "new@example.com",
                 Password = "NewPass@123",
                 TypeUser = UserType.Admin,
@@ -45,7 +46,7 @@ namespace FGC.UnitTests.Application.UserTests.Commands.UpdateUserTests
             // Assert
             var updatedUser = base.Context.Users.FirstOrDefault(u => u.Id == user.Id);
             updatedUser.Should().NotBeNull();
-            updatedUser!.Name.Should().Be(command.Name);
+            updatedUser.Name.Should().Be(command.Name);
             updatedUser.Email.Address.Should().Be(command.Email);
             updatedUser.TypeUser.Should().Be(command.TypeUser);
             updatedUser.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));

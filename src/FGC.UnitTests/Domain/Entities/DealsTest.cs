@@ -1,7 +1,7 @@
 ﻿using FGC.Domain.Core.Exceptions;
 using FGC.Domain.Entities.Deals;
 
-namespace FGC.Unit.Tests.Domain.Entities
+namespace FGC.UnitTests.Domain.Entities
 {
     public class DealsTest
     {
