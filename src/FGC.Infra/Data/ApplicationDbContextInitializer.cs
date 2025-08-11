@@ -28,9 +28,7 @@ public class ApplicationDbContextInitialiser
         // Late development strategy
         if (_context.Database.IsSqlServer())
         {
-
              _context.Database.Migrate();
-
         }
         else
         {
