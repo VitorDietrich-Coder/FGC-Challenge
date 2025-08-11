@@ -8,7 +8,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace FGC.UnitTests.Application.UserTests.Commands.UpdateUserTests
+namespace FGC.Application.UnitTests.UserTests.Commands.UpdateUserTests
 {
     public class DeleteUserCommandTests : TestFixture
     {

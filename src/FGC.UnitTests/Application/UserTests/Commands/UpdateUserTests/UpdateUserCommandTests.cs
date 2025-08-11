@@ -6,7 +6,7 @@ using FGC.Domain.Entities.Users.ValueObjects;
 using FluentAssertions;
 using Xunit;
 
-namespace FGC.UnitTests.Application.UserTests.Commands.UpdateUserTests
+namespace FGC.Application.UnitTests.UserTests.Commands.UpdateUserTests
 {
     public class UpdateUserCommandTests : TestFixture
     {

@@ -7,7 +7,7 @@ using FGC.Infra.Data.MapEntities;
 using FluentAssertions;
 using MediatR;
 
-namespace FGC.UnitTests.Application.DealsTests.Queries.GetAllDealsTests
+namespace FGC.Application.UnitTests.DealsTests.Queries.GetAllDealsTests
 {
     public class GetDealsQueryTests : TestFixture
     {

@@ -8,7 +8,7 @@ using FGC.Application.UnitTests;
 using FluentAssertions;
 using Xunit;
 
-namespace FGC.UnitTests.Application.UserTests.Queries.GetUserTests
+namespace FGC.Application.UnitTests.UserTests.Queries.GetUserTests
 {
     public class GetGamesByUserQueryTests : TestFixture
     {

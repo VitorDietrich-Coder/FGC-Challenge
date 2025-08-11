@@ -3,7 +3,7 @@ using FGC.Application.UnitTests;
 using FluentValidation.TestHelper;
 using Xunit;
 
-namespace FGC.UnitTests.Application.AuthTests.Commands
+namespace FGC.Application.UnitTests.AuthTests.Commands
 {
     public class LoginCommandValidatorTests : IClassFixture<TestFixture>
     {

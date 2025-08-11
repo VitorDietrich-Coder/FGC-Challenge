@@ -8,7 +8,7 @@ using Xunit;
 using Ardalis.GuardClauses;
 using FGC.Application.UnitTests;
 
-namespace FGC.UnitTests.Application.UserTests.Queries.GetUserTests
+namespace FGC.Application.UnitTests.UserTests.Queries.GetUserTests
 {
     public class GetUserQueryTest : TestFixture
     {

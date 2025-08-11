@@ -140,7 +140,7 @@ namespace FGC.Api.Controllers
         /// <summary>
         /// Updates the release status of a game in a user's library.
         /// </summary>
-        [HttpPatch("{userId:int:min(1)}/games/{gameId:int:min(1)}/release")]
+        [HttpPatch("/user-games/{gameId:int:min(1)}/release")]
         [Authorize(Roles = "Admin,User")]
         [SwaggerOperation(
             Summary = "Updates the release status of a game in a user's library.",
@@ -148,12 +148,9 @@ namespace FGC.Api.Controllers
         )]
         [SwaggerResponseProfile("User.Game.ReleaseUpdate")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> UpdateGameReleaseAsync(int userId, int gameId, [FromBody] ReleaseUserGameCommand command)
+        public async Task<IActionResult> UpdateGameReleaseAsync(int gameId)
         {
-            command.UserId = GetUserId();
-            command.GameId = gameId;
-
-            await Mediator.Send(command);
+            await Mediator.Send(new ReleaseUserGameCommand() {GameId = gameId, UserId = GetUserId() });
             return NoContent();
         }
     }

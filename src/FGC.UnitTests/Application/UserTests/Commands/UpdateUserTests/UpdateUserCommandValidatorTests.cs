@@ -4,7 +4,7 @@ using FGC.Application.Users.Commands.UpdateUser;
 using FGC.Domain.Entities.Users.Enums;
 using FluentValidation.TestHelper;
 
-namespace FGC.UnitTests.Application.UserTests.Commands.UpdateUserTests
+namespace FGC.Application.UnitTests.UserTests.Commands.UpdateUserTests
 {
     public class UpdateUserCommandValidatorTests : IClassFixture<TestFixture>
     {

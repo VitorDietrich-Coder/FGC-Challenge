@@ -248,7 +248,7 @@ namespace FGC.Api.UnitTests.Login
                 .ReturnsAsync(Unit.Value);
 
             // Act
-            var result = await _controller.UpdateGameReleaseAsync(userId, gameId, command);
+            var result = await _controller.UpdateGameReleaseAsync(gameId);
 
             // Assert
             Assert.IsType<NoContentResult>(result);

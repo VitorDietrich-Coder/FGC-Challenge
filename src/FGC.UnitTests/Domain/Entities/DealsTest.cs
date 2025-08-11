@@ -1,8 +1,8 @@
 ﻿using FGC.Domain.Core.Exceptions;
 using FGC.Domain.Entities.Deals;
 
-namespace FGC.UnitTests.Domain.Entities
-{
+namespace FGC.Domain.UnitTests.Entities
+{   
     public class DealsTest
     {
         [Fact]

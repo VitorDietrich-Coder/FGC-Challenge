@@ -2,9 +2,8 @@
 using FGC.Domain.Entities.Games;
 using FGC.Domain.Entities.Deals;
 using FGC.Domain.Entities.Users;
-using FGC.Infra.Data.MapEntities;
 
-namespace FGC.UnitTests.Domain.Entities
+namespace FGC.Domain.UnitTests.Entities
 {
     public class GamesTest
     {

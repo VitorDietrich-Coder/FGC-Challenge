@@ -5,7 +5,7 @@ using FGC.Application.UnitTests;
 using FluentAssertions;
 using Xunit;
 
-namespace FGC.UnitTests.Application.GameTests.Queries.GetAllGamesTests
+namespace FGC.Application.UnitTests.GameTests.Queries.GetAllGamesTests
 {
     public class GetAllGamesQueryTests : TestFixture
     {

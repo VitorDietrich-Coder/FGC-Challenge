@@ -27,6 +27,12 @@ namespace FGC.Application.Users.Commands.CreateUser
         public async Task<UserResponse> Handle(CreateUserCommand request,
             CancellationToken cancellationToken)
         {
+            var userEntity = _context.Users.Where(x => x.Name == request.Name || x.Username == request.Username || x.Email.Address == request.Email).FirstOrDefault();
+
+            if (userEntity != null)
+            {
+                throw new InvalidOperationException($"The user {request.Name} already exists, Verify Email, Name or Username");
+            }
 
             var user = new User
             {

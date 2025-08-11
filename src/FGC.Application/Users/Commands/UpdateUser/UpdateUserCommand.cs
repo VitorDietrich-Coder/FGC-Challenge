@@ -38,12 +38,36 @@ namespace FGC.Application.Users.Commands.UpdateUser
 
             Guard.Against.NotFound(request.Id, entity);
 
-            entity.Name = request.Name;
-            entity.Username = request.Username;
-            entity.Email = new Email(request.Email);
-            entity.Password = new Password(request.Password);
-            entity.TypeUser = (UserType)request.TypeUser;
-            entity.Active = (bool)request.Active;
+            if (request.Name is not null)
+            {
+                entity.Name = request.Name;
+            }
+
+            if (request.Username is not null)
+            {
+                entity.Username = request.Username;
+            }
+
+            if (request.Email is not null)
+            {
+                entity.Email = new Email(request.Email);
+            }
+
+            if (request.Password is not null)
+            {
+                entity.Password = new Password(request.Password);
+            }
+
+            if (request.TypeUser is not null)
+            {
+                entity.TypeUser = (UserType)request.TypeUser;
+            }
+
+            if (request.Active is not null)
+            {
+                entity.Active = (bool)request.Active;
+            }
+      
             entity.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync(cancellationToken);

@@ -1,13 +1,11 @@
 ﻿using FGC.Application.Games.Queries.GetGames;
 using FGC.Domain.Common.ValueObjects;
 using FGC.Domain.Entities.Games;
-using FGC.Application.UnitTests;
-using FGC.Application.Common.Exceptions;
 using FluentAssertions;
 using Xunit;
 using Ardalis.GuardClauses;
 
-namespace FGC.UnitTests.Application.GameTests.Queries.GetGamesTests
+namespace FGC.Application.UnitTests.GameTests.Queries.GetGamesTests
 {
     public class GetGameByIdQueryTests : TestFixture
     {

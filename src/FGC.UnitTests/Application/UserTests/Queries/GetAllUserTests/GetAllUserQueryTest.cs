@@ -6,7 +6,7 @@ using FGC.Application.UnitTests;
 using FluentAssertions;
 using Xunit;
 
-namespace FGC.UnitTests.Application.UserTests.Queries.GetAllUserTests
+namespace FGC.Application.UnitTests.UserTests.Queries.GetAllUserTests
 {
     public class GetAllUserQueryTest : TestFixture
     {

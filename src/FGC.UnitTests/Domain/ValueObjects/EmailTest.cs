@@ -1,7 +1,7 @@
 ﻿using FGC.Domain.Core.Exceptions;
 using FGC.Domain.Entities.Users.ValueObjects;
 
-namespace FGC.UnitTests.Domain.ValueObjects
+namespace FGC.Domain.UnitTests.ValueObjects
 {
     public class EmailTest
     {

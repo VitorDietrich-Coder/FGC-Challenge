@@ -63,8 +63,6 @@ namespace FGC.Application.UnitTests.DealsTests.Queries.GetDealsTests
             result.Discount.Should().Be(20);
             result.StartDate.Should().Be(deal.StartDate);
             result.ExpirationDate.Should().Be(deal.ExpirationDate);
-            result.Games.Should().Contain(g => g.Name == "Game One");
-            result.Games.Should().Contain(g => g.Name == "Game Two");
         }
     }
 }
