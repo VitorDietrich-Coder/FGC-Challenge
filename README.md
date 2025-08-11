@@ -12,8 +12,8 @@ Repositório oficial do **FIAP Cloud Games (FGC)**, API backend desenvolvida em 
 - [🛠️ Configuração do Banco de Dados](#-configuração-do-banco-de-dados)
 - [🌱 Dados Iniciais (Seed com EF Core)](#-dados-iniciais-seed-com-ef-core)
 - [🔐 Credenciais de Acesso](#-credenciais-de-acesso)
-- [🔗 Referências e Documentações](#-referências-e-documentações)
-
+- [🔗 Referências e Documentações](#-documentação)
+- [Deals](https://gg.deals/) Reference de shop of games
 ---
 
 ## 📦 Visão Geral
@@ -36,7 +36,6 @@ O **FGC** simula uma **loja virtual de jogos digitais** com recursos completos d
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/)
 - [JWT Bearer Authentication](https://jwt.io/)
-- [Deals](https://gg.deals/)
 ---
 
 ## 🚀 Como Executar o Projeto
@@ -50,16 +49,9 @@ cd FGC-Challenge
 
 dotnet restore
 ```
-# 🌐 Configuração de Host
-- 👤 Autenticação no SQL Server
-  
-SQLSERVER_USER=seu_usuario
-SQLSERVER_PASSWORD=sua_senha_segura
+## 🌐 Configuração de Host
 
-- 🗃️ Banco de Dados
-SQLSERVER_DB=FGC_Games
-SQLSERVER_HOST=localhost
-SQLSERVER_PORT=1433
+#### 👤 Autenticação no SQL Server
 
 Alterar no Arquivo AppsettingsDevelop.json
 
@@ -67,34 +59,47 @@ Alterar no Arquivo AppsettingsDevelop.json
   "DefaultConnection": "Server=localhost,1433;Database=FGC_Games;User Id=seu_usuario;Password=sua_senha_segura;TrustServerCertificate=True;"
 }
 
+Para rodar o projeto execute:
 dotnet run --project ./src/FGC.Api
 
 ## Dados inseridos:
-👤 Usuários
+
+#### 👤 Usuários
+
 adminnew@fiapgames.com (Admin)
+
 usernew@fiapgames.com (Usuário comum)
 
-🎮 Jogos
+####  🎮 Jogos
+
 4 títulos com nome, categoria e preço
 
-🛍️ Promoções
+####  🛍️ Promoções
+
 3 promoções com datas de validade
 
-📚 Bibliotecas
+####  📚 Bibliotecas
+
 Uma biblioteca para cada usuário
 
-🧾 LibraryGames
+####  🧾 LibraryGames
+
 Registros de jogos comprados, com preço pago e data de compra
 
-🔐 Credenciais de Acesso
+## 🔐 Credenciais de Acesso
 
-👤 Usuário Comum
+####   👤 Usuário Comum
+
 Email: usernew@fiapgames.com
+
 Senha: 1GamesTeste@
 
-👑 Usuário Administrador
+####  👑 Usuário Administrador
+
 Email: adminnew@fiapgames.com
+
 Senha: 1GamesAdmin@
 
-## 📄 Documentação
-🛠️ Documentação Técnica (em breve)
+##  📄 Documentação
+
+🛠️ Event Storming: https://miro.com/app/board/uXjVJXr1M14=/
