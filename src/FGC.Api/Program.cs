@@ -5,6 +5,7 @@ using FGC.Application.Services.Data;
 using FGC.Infra.CrossCutting;
 using FGC.Infra.Data;
 using Microsoft.EntityFrameworkCore;
+using Prometheus;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -77,12 +78,13 @@ using (var scope = app.Services.CreateScope())
 #endif
 
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwaggerWithUI();
-}
+//}
 
 app.UseRouting();
+app.UseHttpMetrics();
 
 app.UseHttpsRedirection();
 
@@ -93,6 +95,7 @@ app.UseMiddleware<UnauthorizedResponseMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapMetrics();
 app.MapHealthChecks("/health");
 
 app.Run();
