@@ -1,16 +1,24 @@
-version: '3.8'
-
 services:
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-storage:/var/lib/grafana
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      SA_PASSWORD: "YourStrong!Passw0rd"  # Use uma senha forte
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  fgc-api:
+    image: fiap-api:latest  # Substitua pela sua imagem Docker do app
+    container_name: fgc-api
+    depends_on:
+      - sqlserver
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=FGC_Games;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+    ports:
+      - "8080:8080" # Ajuste se necessário
 
   prometheus:
     image: prom/prometheus:latest
@@ -22,5 +30,17 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
 volumes:
+  sqlserver-data:
   grafana-storage:

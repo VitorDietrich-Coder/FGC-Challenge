@@ -57,7 +57,7 @@ app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 
-#if DEBUG
+
 // Initialise and seed the database on start-up
 using (var scope = app.Services.CreateScope())
 {
@@ -65,7 +65,9 @@ using (var scope = app.Services.CreateScope())
     {
         var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
         initialiser.Initialise();
+#if DEBUG
         initialiser.Seed();
+#endif
     }
     catch (Exception ex)
     {
@@ -75,7 +77,7 @@ using (var scope = app.Services.CreateScope())
         throw;
     }
 }
-#endif
+
 
 
 //if (app.Environment.IsDevelopment())
