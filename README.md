@@ -2,20 +2,6 @@
 
 Repositório oficial do **FIAP Cloud Games (FGC)**, API backend desenvolvida em **.NET 8** como parte do **Tech Challenge FIAP – Fase 1** da FIAP.
 
----
-
-## 📚 Índice
-
-- [📦 Visão Geral](#-visão-geral)
-- [⚙️ Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [🚀 Como Executar o Projeto](#-como-executar-o-projeto)
-- [🛠️ Configuração do Banco de Dados](#-configuração-do-banco-de-dados)
-- [🌱 Dados Iniciais (Seed com EF Core)](#-dados-iniciais-seed-com-ef-core)
-- [🔐 Credenciais de Acesso](#-credenciais-de-acesso)
-- [🔗 Referências e Documentações](#-documentação)
-- [Deals](https://gg.deals/) Reference de shop of games
----
-
 ## 📦 Visão Geral
 
 O **FGC** simula uma **loja virtual de jogos digitais** com recursos completos de autenticação, catálogo, promoções e bibliotecas de jogos por usuário.
@@ -36,6 +22,7 @@ O **FGC** simula uma **loja virtual de jogos digitais** com recursos completos d
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/)
 - [JWT Bearer Authentication](https://jwt.io/)
+- [Deals](https://gg.deals/) Reference of shop of games
 ---
 
 ## 🚀 Como Executar o Projeto
