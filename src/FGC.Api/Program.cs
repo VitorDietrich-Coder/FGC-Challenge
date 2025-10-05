@@ -13,8 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 //TODO: Configurate appsettings for production
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettingsDevelop.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettingsDevelop.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
     .AddEnvironmentVariables();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

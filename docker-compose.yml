@@ -3,22 +3,29 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
     environment:
-      SA_PASSWORD: "YourStrong!Passw0rd"  # Use uma senha forte
+      SA_PASSWORD: "YourStrong!Passw0rd"
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong!Passw0rd -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 40
 
   fgc-api:
-    image: fiap-api:latest  # Substitua pela sua imagem Docker do app
+    image: fiap-api:latest
     container_name: fgc-api
     depends_on:
-      - sqlserver
+      sqlserver:
+        condition: service_healthy
     environment:
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=FGC_Games;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=FGC_Games;User=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
     ports:
-      - "8080:8080" # Ajuste se necessário
+      - "8080:8080"
 
   prometheus:
     image: prom/prometheus:latest
