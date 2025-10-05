@@ -18,10 +18,10 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: 🔧 Restaurar e compilar solução
-      run: dotnet build src\FGC.Api.sln --configuration Release
+      run: dotnet build src/FGC.Api.sln --configuration Release
 
   test:
-    name: Testes Unitários
+    name: ✅ Testes Unitários
     runs-on: ubuntu-latest
     needs: build  # depende do job de build
 
@@ -35,7 +35,7 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Executar testes
-      run: dotnet test src\FGC.Api.sln --no-build --verbosity normal
+      run: dotnet test src/FGC.Api.sln --no-build --verbosity normal
 
   push:
     name: 🚀 Docker Build & Push
