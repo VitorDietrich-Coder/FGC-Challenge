@@ -24,6 +24,7 @@ public class ApplicationDbContextInitialiser
         // Early development strategy
         //_context.Database.EnsureDeleted();
         //_context.Database.EnsureCreated();
+        _context.Database.Migrate();
 
         // Late development strategy
         if (_context.Database.IsSqlServer())
