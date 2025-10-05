@@ -65,9 +65,7 @@ using (var scope = app.Services.CreateScope())
     {
         var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
         initialiser.Initialise();
-#if DEBUG
         initialiser.Seed();
-#endif
     }
     catch (Exception ex)
     {
