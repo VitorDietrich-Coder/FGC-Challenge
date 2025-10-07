@@ -31,3 +31,10 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "FGC.Api.dll"]
+
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS migrator
+WORKDIR /src
+COPY . .
+WORKDIR /src/src/FGC.Api
+ENTRYPOINT ["dotnet", "ef", "database", "update", "--no-build", "--project", "FGC.Api.csproj"]

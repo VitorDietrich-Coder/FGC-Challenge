@@ -9,12 +9,17 @@ services:
       - "1433:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
-    healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong!Passw0rd -Q 'SELECT 1' || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 40
-
+      
+  migrator:
+    build:
+      context: .
+      target: migrator
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=FGC_Games;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+      
   fgc-api:
     image: fiap-api:latest
     container_name: fgc-api
@@ -23,7 +28,7 @@ services:
         condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=FGC_Games;User=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=FGC_Games;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
     ports:
       - "8080:8080"
 
