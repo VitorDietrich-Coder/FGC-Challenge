@@ -63,16 +63,15 @@ using (var scope = app.Services.CreateScope())
 {
     try
     {
-
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        dbContext.Database.Migrate(); 
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        Console.WriteLine("Tentando aplicar migrations...");
+        db.Database.Migrate();
+        Console.WriteLine(" Migrations aplicadas.");
     }
     catch (Exception ex)
     {
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred during database initialisation.");
-
-        throw;
+        Console.WriteLine(" Erro ao aplicar migrations:");
+        Console.WriteLine(ex.Message);
     }
 }
 
@@ -80,7 +79,7 @@ using (var scope = app.Services.CreateScope())
 
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwaggerWithUI();
+app.UseSwaggerWithUI();
 //}
 
 app.UseRouting();

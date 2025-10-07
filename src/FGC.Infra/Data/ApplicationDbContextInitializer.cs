@@ -27,12 +27,14 @@ public class ApplicationDbContextInitialiser
         //_context.Database.Migrate();
 
         // Late development strategy
-        //if (_context.Database.IsSqlServer())
-        //{
+        if (_context.Database.IsSqlServer())
+        {
              _context.Database.Migrate();
-      
+        }
+        else
+        {
             _context.Database.EnsureCreated();
-        
+        }
     } 
 
     public void Seed()
