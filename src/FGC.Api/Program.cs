@@ -63,9 +63,9 @@ using (var scope = app.Services.CreateScope())
 {
     try
     {
-        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
-        initialiser.Initialise();
-        initialiser.Seed();
+
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        dbContext.Database.Migrate(); 
     }
     catch (Exception ex)
     {
