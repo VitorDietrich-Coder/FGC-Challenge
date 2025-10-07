@@ -61,12 +61,13 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 // Initialise and seed the database on start-up
 using (var scope = app.Services.CreateScope())
 {
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
     try
     {
-        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        Console.WriteLine("Tentando aplicar migrations...");
-        db.Database.Migrate();
-        Console.WriteLine(" Migrations aplicadas.");
+        Console.WriteLine(" Aplicando migrations...");
+        dbContext.Database.Migrate();
+        Console.WriteLine(" Migrations aplicadas com sucesso!");
     }
     catch (Exception ex)
     {
