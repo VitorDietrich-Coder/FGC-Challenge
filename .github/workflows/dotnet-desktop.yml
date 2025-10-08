@@ -21,7 +21,25 @@ jobs:
 
     - name: 🔧 Restaurar e compilar solução
       run: dotnet build src/FGC.Api/FGC.Api.sln  --configuration Release
+      
+  test:
+    name: ✅ Testes Unitários
+    runs-on: ubuntu-latest
+    needs: build  # depende do job de build
 
+    steps:
+    - name:  Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Instalar .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Executar testes
+      run: |
+        dotnet test src/FGC.UnitTests/FGC.UnitTests.csproj --configuration Debug --verbosity normal
+        dotnet test src/FGC.BDD/FGC.BDD.csproj --configuration Debug --verbosity normal
 
   push:
     name: 🚀 Docker Build & Push
