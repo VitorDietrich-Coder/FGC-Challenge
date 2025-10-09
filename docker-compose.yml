@@ -1,7 +1,8 @@
+version: '3.9'
+
 services:
-  sqlserver:
+  db:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver
     environment:
       SA_PASSWORD: "YourStrong!Passw0rd"
       ACCEPT_EULA: "Y"
@@ -9,50 +10,54 @@ services:
       - "1433:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
-      
-  migrator:
+    networks:
+      - app-network
+
+  fgc-api:
     build:
       context: .
-      target: migrator
-    depends_on:
-      sqlserver:
-        condition: service_healthy
-    environment:
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=FGC_Games;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
-      
-  fgc-api:
-    image: fiap-api:latest
-    container_name: fgc-api
-    depends_on:
-      sqlserver:
-        condition: service_healthy
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=FGC_Games;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:80"
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=db;Database=FGC_Games;User Id=sa;Password=YourStrong!Passw0rd;Trusted_Connection=False;TrustServerCertificate=True;
+    depends_on:
+      - db
+    networks:
+      - app-network
 
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-    ports:
-      - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    depends_on:
+      - fgc-api   
+    networks:
+      - app-network
 
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
     ports:
       - "3000:3000"
-    volumes:
-      - grafana-storage:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    depends_on:
+      - fgc-api
+    networks:
+      - app-network
 
 volumes:
   sqlserver-data:
   grafana-storage:
+
+networks:
+  app-network:
+    driver: bridge

@@ -61,21 +61,20 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 // Initialise and seed the database on start-up
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
     try
     {
-        Console.WriteLine(" Aplicando migrations...");
-        dbContext.Database.Migrate();
-        Console.WriteLine(" Migrations aplicadas com sucesso!");
+        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        initialiser.Initialise();
+        initialiser.Seed();
     }
     catch (Exception ex)
     {
-        Console.WriteLine(" Erro ao aplicar migrations:");
-        Console.WriteLine(ex.Message);
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred during database initialisation.");
+
+        throw;
     }
 }
-
 
 
 //if (app.Environment.IsDevelopment())
