@@ -45,6 +45,7 @@ jobs:
     name: 🚀 Docker Build & Push
     runs-on: ubuntu-latest
     needs: test  # depende do job de test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'  # Só executa em push na main
 
     steps:
     - name: 📥 Checkout do código
