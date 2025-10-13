@@ -32,7 +32,7 @@ O **FGC** simula uma **loja virtual de jogos digitais** com recursos completos d
 ```bash
 git clone https://github.com/VitorDietrich-Coder/FGC-Fiap.git
 
-cd FGC-Challenge
+cd ../FGC-Challenge/src/fgc.api
 
 dotnet restore
 ```
@@ -90,3 +90,25 @@ Senha: 1GamesAdmin@
 ##  📄 Documentação
 
 🛠️ Event Storming: https://miro.com/app/board/uXjVJXr1M14=/
+
+##  🐳 Rodando a Aplicação com docker
+
+cd FGC-Challenge
+docker compose up -d
+
+Com esse comando irá subir a API juntamente com o grafana e o prometheus, 
+tendo em vista que deixei um docker compose para empacotar e subir mais facil localmente.
+
+docker-compose.yml
+
+Após isso teremos os seguintes serviços:
+
+API: http://localhost:8080
+
+Grafana: http://localhost:3000
+(usuário/padrão: admin / admin)
+
+Prometheus: http://localhost:9090/query
+
+
+
