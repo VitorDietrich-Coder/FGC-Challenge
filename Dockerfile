@@ -45,3 +45,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "FGC.Api.dll"]
+
+FROM prom/prometheus
+COPY prometheus.yml /etc/prometheus/prometheus.yml
