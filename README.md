@@ -92,9 +92,13 @@ Senha: 1GamesAdmin@
 🛠️ Event Storming: https://miro.com/app/board/uXjVJXr1M14=/
 
 ##  🐳 Rodando a Aplicação com docker
+Rode no console:
 
+```bash
 cd FGC-Challenge
+
 docker compose up -d
+```
 
 Com esse comando irá subir a API juntamente com o grafana e o prometheus, 
 tendo em vista que deixei um docker compose para empacotar e subir mais facil localmente.
